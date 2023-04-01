@@ -24,9 +24,23 @@ public class MemberService {
      */
     public Long join(Member member){
         //같은 이름이 있는 중복회원은 가입 안된다(요구사항)
+//  이런방식으로 하지말고 AOP를 사용하여 속도를 체크해보자
+//        long start = System.currentTimeMillis();
+//        try {
+//            validateDuplicateMember(member); //회원 검증
+//            memberRepository.save(member);
+//            return member.getId();
+//
+//        }finally {
+//            long finish = System.currentTimeMillis();
+//            long timeMs = finish-start;
+//            System.out.println("join = " + timeMs + "ms");
+//        }
+
         validateDuplicateMember(member); //회원 검증
         memberRepository.save(member);
         return member.getId();
+
     }
 
     /**

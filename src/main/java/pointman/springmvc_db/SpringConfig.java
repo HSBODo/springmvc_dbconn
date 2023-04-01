@@ -3,6 +3,7 @@ package pointman.springmvc_db;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pointman.springmvc_db.aop.TimeTraceAop;
 import pointman.springmvc_db.reposirory.*;
 import pointman.springmvc_db.service.MemberService;
 
@@ -39,5 +40,11 @@ public class SpringConfig {
 //        //return new JdbcMemberRepository(dataSource);
 //        //return  new JdbcTemplateMemberRepository(dataSource);
 //        //return  new JpaMemberRepository(em);
+//    }
+
+//  AOP 수동 bean 등록
+//    @Bean
+//    public TimeTraceAop timeTraceAop(){
+//        return new TimeTraceAop();
 //    }
 }
