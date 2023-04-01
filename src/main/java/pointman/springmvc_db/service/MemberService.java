@@ -1,5 +1,7 @@
 package pointman.springmvc_db.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pointman.springmvc_db.domain.Member;
 import pointman.springmvc_db.reposirory.MemberRepository;
 import pointman.springmvc_db.reposirory.MemoryMemberRepository;
@@ -7,9 +9,11 @@ import pointman.springmvc_db.reposirory.MemoryMemberRepository;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MemberService {
     private  final MemberRepository memberRepository;
 
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
