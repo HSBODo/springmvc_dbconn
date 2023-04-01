@@ -27,7 +27,7 @@ class MemberServiceIntegrationTest {
     MemberRepository memberRepository;
 
     @Test
-    //@Commit 테스트 종료후 DB커밋
+    //@Commit //테스트 종료후 DB커밋
     void 회원가입() {
 
         //given
