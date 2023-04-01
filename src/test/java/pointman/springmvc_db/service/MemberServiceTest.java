@@ -9,6 +9,9 @@ import pointman.springmvc_db.reposirory.MemberRepository;
 import pointman.springmvc_db.reposirory.MemoryMemberRepository;
 
 
+import java.util.List;
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,17 +19,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class MemberServiceTest {
 
     MemberService memberService;
-    MemoryMemberRepository repository;
+    MemoryMemberRepository memoryMemberRepository;
 
     @BeforeEach //테스트 메서드 실행 전 실행
     void beforeEach(){
-        MemoryMemberRepository memoryMemberRepository = new MemoryMemberRepository();
+        memoryMemberRepository = new MemoryMemberRepository();
         memberService = new MemberService(memoryMemberRepository);
 
     }
     @AfterEach //테스트 메서드 실행 후 실행
     void afterEach(){
-        repository.clearStore();
+        memoryMemberRepository.clearStore();
     }
 
     @Test
@@ -70,9 +73,31 @@ class MemberServiceTest {
 
     @Test
     void findMembers() {
+        //given
+        Member member1 = new Member();
+        member1.setName("홍길동");
+        Member member2 = new Member();
+        member2.setName("임꺽정");
+        //when
+        memberService.join(member1);
+        memberService.join(member2);
+        List<Member> members = memberService.findMembers();
+        //then
+        assertThat(members.size()).isEqualTo(2);
+
     }
 
     @Test
     void findOne() {
+        //given
+        Member member1 = new Member();
+        member1.setName("홍길동");
+
+        //when
+        memberService.join(member1);
+        Member result = memberService.findOne(member1.getId()).get();
+
+        //then
+        assertThat(result).isEqualTo(member1);
     }
 }
