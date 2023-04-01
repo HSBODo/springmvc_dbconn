@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pointman.springmvc_db.reposirory.JdbcMemberRepository;
+import pointman.springmvc_db.reposirory.JdbcTemplateMemberRepository;
 import pointman.springmvc_db.reposirory.MemberRepository;
 import pointman.springmvc_db.reposirory.MemoryMemberRepository;
 import pointman.springmvc_db.service.MemberService;
@@ -15,6 +16,10 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
     private DataSource dataSource;
+
+
+    //스프링 부트는 DataSource를 스프링 빈으로 자동 등록해준다.
+    //자동 등록되는 스프링 빈의 이름은 dataSource다.
     @Autowired
     public SpringConfig(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -26,6 +31,7 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository(){
         //return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);
+        //return new JdbcMemberRepository(dataSource);
+        return  new JdbcTemplateMemberRepository(dataSource);
     }
 }
